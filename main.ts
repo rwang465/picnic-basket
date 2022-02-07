@@ -1,3 +1,15 @@
+function checkGuest (text: string) {
+    match = 0
+    for (let index = 0; index <= 4; index++) {
+        if (userInput == foodNames[index]) {
+            match += 1
+        }
+    }
+    game.splash(match)
+}
+let match = 0
+let userInput = ""
+let foodNames: string[] = []
 scene.setBackgroundImage(img`
     9999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999
     9999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999
@@ -296,34 +308,19 @@ img`
     . . . . . . . . . c c c c c . . 
     `
 ]
-let foodNames = [
-"strawberry cake",
+foodNames = [
+"cake",
 "strawberry",
 "pizza",
 "ham",
 "cherry"
 ]
+info.setScore(0)
+let keepMiss = 0
 for (let index = 0; index <= 4; index++) {
     picnicFood.setImage(imageList[index])
     pause(500)
 }
 picnicFood.destroy()
-let userInput = sprites.create(img`
-    . . . . . . . . . . . . . . . . 
-    . . . . . . . . . . . . . . . . 
-    . . . . . . . . . . . . . . . . 
-    . . . . . . . . . . . . . . . . 
-    . . . . . . . . . . . . . . . . 
-    . . . . . . . . . . . . . . . . 
-    . . . . . . . . . . . . . . . . 
-    . . . . . . . . . . . . . . . . 
-    . . . . . . . . . . . . . . . . 
-    . . . . . . . . . . . . . . . . 
-    . . . . . . . . . . . . . . . . 
-    . . . . . . . . . . . . . . . . 
-    . . . . . . . . . . . . . . . . 
-    . . . . . . . . . . . . . . . . 
-    . . . . . . . . . . . . . . . . 
-    . . . . . . . . . . . . . . . . 
-    `, SpriteKind.Player)
-userInput.sayText(game.askForString("What was in Yogi's basket"))
+userInput = game.askForString("What was in Yogi's basket")
+checkGuest(userInput)
